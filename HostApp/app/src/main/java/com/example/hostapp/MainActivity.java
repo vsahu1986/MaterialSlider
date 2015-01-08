@@ -106,7 +106,6 @@ public class MainActivity extends ActionBarActivity implements ScrimInsetsFrameL
 	        int top = insets.top;
 	        insets.top += toolbar.getHeight();
 	        toolbar.setLayoutParams(lp);
-	      //  mMapFragment.setMapInsets(insets);
 	        insets.top = top; // revert
 	}
 

@@ -4,52 +4,31 @@
     android:layout_height="match_parent"
     android:fitsSystemWindows="true" >
 
-    <com.example.hostapp.ScrimInsetsFrameLayout
-        xmlns:app="http://schemas.android.com/apk/res-auto"
+
+    <RelativeLayout
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:fitsSystemWindows="true"
-        app:insetForeground="#4000" >
+        android:layout_height="match_parent" >
 
-        <!-- Framelayout per la visualizzazione -->
-
-        <RelativeLayout
+        <android.support.v7.widget.Toolbar
+            android:id="@+id/toolbar"
             android:layout_width="match_parent"
-            android:layout_height="match_parent" >
+            android:layout_height="wrap_content"
+            android:background="?attr/colorPrimary"
+            android:minHeight="?attr/actionBarSize" >
+        </android.support.v7.widget.Toolbar>
 
-            <android.support.v7.widget.Toolbar
-                android:id="@+id/toolbar"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:background="?attr/colorPrimary"
-                android:minHeight="?attr/actionBarSize" >
-            </android.support.v7.widget.Toolbar>
-
-            <FrameLayout
-                android:id="@+id/frame_container"
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:layout_below="@+id/toolbar" >
-
-                <android.support.v4.view.ViewPager
-                    android:id="@+id/viewpager"
-                    android:layout_width="match_parent"
-                    android:layout_height="match_parent"
-                    android:background="@android:color/white" >
-
-                    <android.support.v4.view.PagerTitleStrip
-                        android:id="@+id/titlestrip"
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content" />
-                </android.support.v4.view.ViewPager>
-            </FrameLayout>
-        </RelativeLayout>
-    </com.example.hostapp.ScrimInsetsFrameLayout>
+        <FrameLayout
+            android:id="@+id/frame_container"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_below="@+id/toolbar" >
+        </FrameLayout>
+    </RelativeLayout>
 
     <com.example.hostapp.ScrimInsetsFrameLayout
         xmlns:app="http://schemas.android.com/apk/res-auto"
         android:id="@+id/linearLayout"
-        android:layout_width="260dp"
+        android:layout_width="240dp"
         android:layout_height="match_parent"
         android:layout_gravity="start"
         android:background="#ffffffff"
@@ -144,15 +123,13 @@
                 android:layout_width="match_parent"
                 android:layout_height="1dip"
                 android:layout_above="@+id/bottom_sections"
-                android:background="?android:attr/dividerVertical" />
+                android:background="#defedd" />
 
             <LinearLayout
                 android:id="@+id/bottom_sections"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_alignParentBottom="true"
-                android:layout_alignParentLeft="true"
-                android:layout_alignParentRight="true"
                 android:orientation="vertical" >
             </LinearLayout>
         </RelativeLayout>

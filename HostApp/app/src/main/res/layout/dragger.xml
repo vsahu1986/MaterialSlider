@@ -1,0 +1,28 @@
+<draggerhelper.OuterLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@android:color/white"
+    android:id="@+id/outer_layout">
+
+    <Button
+        android:id="@+id/hidden_button"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:textSize="64dip"
+        android:text="Hidden button"/>
+
+    <LinearLayout
+        android:id="@+id/main_layout"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical"
+        android:clickable="true"
+        android:background="@android:color/holo_blue_dark">
+        <Button
+            android:id="@+id/queen_button"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:textSize="64dip"
+            android:text="Queen"/>
+    </LinearLayout>
+</draggerhelper.OuterLayout>
