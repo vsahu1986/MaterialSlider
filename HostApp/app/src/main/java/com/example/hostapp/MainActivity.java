@@ -18,30 +18,30 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
 
-public class MainActivity extends ActionBarActivity implements ScrimInsetsFrameLayout.OnInsetsCallback{
-	Toolbar toolbar;
-	private Resources res;
-	@Override
-	protected void onCreate(Bundle savedInstanceState) {
-		super.onCreate(savedInstanceState);
-		setContentView(R.layout.activity_main);
-		toolbar = (Toolbar) findViewById(R.id.toolbar);
-		res = this.getResources();
+public class MainActivity extends ActionBarActivity implements ScrimInsetsFrameLayout.OnInsetsCallback {
+    Toolbar toolbar;
+    private Resources res;
 
-		this.setSupportActionBar(toolbar);
-		ActionBar actionBar = getSupportActionBar();
-		actionBar.setDisplayHomeAsUpEnabled(true);
-		actionBar.setHomeButtonEnabled(true);
-		if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP)
-	    { 
-			ScrimInsetsFrameLayout scrimInsetsFrameLayout = (ScrimInsetsFrameLayout)
-	                findViewById(R.id.linearLayout);
-	        scrimInsetsFrameLayout.setOnInsetsCallback(this);
-	    } 
+    @Override
+    protected void onCreate(Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+        setContentView(R.layout.activity_main);
+        toolbar = (Toolbar) findViewById(R.id.toolbar);
+        res = this.getResources();
 
-	}
+        this.setSupportActionBar(toolbar);
+        ActionBar actionBar = getSupportActionBar();
+        actionBar.setDisplayHomeAsUpEnabled(true);
+        actionBar.setHomeButtonEnabled(true);
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
+            ScrimInsetsFrameLayout scrimInsetsFrameLayout = (ScrimInsetsFrameLayout)
+                    findViewById(R.id.linearLayout);
+            scrimInsetsFrameLayout.setOnInsetsCallback(this);
+        }
 
-	private class ViewPagerAdapter extends FragmentStatePagerAdapter {
+    }
+
+    private class ViewPagerAdapter extends FragmentStatePagerAdapter {
 
         public ViewPagerAdapter(FragmentManager fm) {
             super(fm);
@@ -58,12 +58,17 @@ public class MainActivity extends ActionBarActivity implements ScrimInsetsFrameL
 
         @Override
         public CharSequence getPageTitle(int position) {
-            switch(position) {
-                case 0: return "tab 1";
-                case 1: return "tab 2";
-                case 2: return "tab 3";
-                case 3: return "tab 4";
-                default: return null;
+            switch (position) {
+                case 0:
+                    return "tab 1";
+                case 1:
+                    return "tab 2";
+                case 2:
+                    return "tab 3";
+                case 3:
+                    return "tab 4";
+                default:
+                    return null;
             }
         }
 
@@ -73,7 +78,7 @@ public class MainActivity extends ActionBarActivity implements ScrimInsetsFrameL
      * It doesn't matter the color of the icons, but they must have solid colors
      */
     private Drawable getIcon(int position) {
-        switch(position) {
+        switch (position) {
             case 0:
                 return res.getDrawable(R.drawable.ic_drawer);
             case 1:
@@ -85,7 +90,7 @@ public class MainActivity extends ActionBarActivity implements ScrimInsetsFrameL
         return null;
     }
 
-    public static class  IndexFragment extends Fragment {
+    public static class IndexFragment extends Fragment {
         @Override
         public View onCreateView(LayoutInflater inflater,
                                  @Nullable ViewGroup container,
@@ -97,16 +102,16 @@ public class MainActivity extends ActionBarActivity implements ScrimInsetsFrameL
         }
     }
 
-	@Override
-	public void onInsetsChanged(Rect insets) {
-		  Toolbar toolbar = this.toolbar;
-	        ViewGroup.MarginLayoutParams lp = (ViewGroup.MarginLayoutParams)
-	                toolbar.getLayoutParams();
-	        lp.topMargin = insets.top;
-	        int top = insets.top;
-	        insets.top += toolbar.getHeight();
-	        toolbar.setLayoutParams(lp);
-	        insets.top = top; // revert
-	}
+    @Override
+    public void onInsetsChanged(Rect insets) {
+        Toolbar toolbar = this.toolbar;
+        ViewGroup.MarginLayoutParams lp = (ViewGroup.MarginLayoutParams)
+                toolbar.getLayoutParams();
+        lp.topMargin = insets.top;
+        int top = insets.top;
+        insets.top += toolbar.getHeight();
+        toolbar.setLayoutParams(lp);
+        insets.top = top; // revert
+    }
 
 }

@@ -47,7 +47,7 @@ public class OuterLayout extends RelativeLayout {
                 return;
             }
             if ((mDraggingState == ViewDragHelper.STATE_DRAGGING || mDraggingState == ViewDragHelper.STATE_SETTLING) &&
-                 state == ViewDragHelper.STATE_IDLE) {
+                    state == ViewDragHelper.STATE_IDLE) {
                 // the view stopped from moving.
 
                 if (mDraggingBorder == 0) {
@@ -107,7 +107,7 @@ public class OuterLayout extends RelativeLayout {
 
             final int settleDestY = settleToOpen ? mVerticalRange : 0;
 
-            if(mDragHelper.settleCapturedViewAt(0, settleDestY)) {
+            if (mDragHelper.settleCapturedViewAt(0, settleDestY)) {
                 ViewCompat.postInvalidateOnAnimation(OuterLayout.this);
             }
         }
@@ -120,7 +120,7 @@ public class OuterLayout extends RelativeLayout {
 
     @Override
     protected void onFinishInflate() {
-        mQueenButton  = (Button) findViewById(R.id.queen_button);
+        mQueenButton = (Button) findViewById(R.id.queen_button);
         mDragHelper = ViewDragHelper.create(this, 1.0f, new DragHelperCallback());
         mIsOpen = false;
         super.onFinishInflate();
@@ -152,7 +152,7 @@ public class OuterLayout extends RelativeLayout {
     @Override
     public boolean onInterceptTouchEvent(MotionEvent event) {
         if (isQueenTarget(event) && mDragHelper.shouldInterceptTouchEvent(event)) {
-                return true;
+            return true;
         } else {
             return false;
         }
