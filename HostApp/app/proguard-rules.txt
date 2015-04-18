@@ -1,0 +1,5 @@
+-keep class com.google.**
+-dontwarn com.google.**
+
+-keep class org.apache.**
+-dontwarn org.apache.**

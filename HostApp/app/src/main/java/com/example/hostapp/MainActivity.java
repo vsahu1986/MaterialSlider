@@ -34,11 +34,47 @@ public class MainActivity extends ActionBarActivity implements ScrimInsetsFrameL
         actionBar.setDisplayHomeAsUpEnabled(true);
         actionBar.setHomeButtonEnabled(true);
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
-            ScrimInsetsFrameLayout scrimInsetsFrameLayout = (ScrimInsetsFrameLayout)
-                    findViewById(R.id.linearLayout);
+            ScrimInsetsFrameLayout scrimInsetsFrameLayout = (ScrimInsetsFrameLayout) findViewById(R.id.linearLayout);
             scrimInsetsFrameLayout.setOnInsetsCallback(this);
         }
 
+    }
+
+    /*
+     * It doesn't matter the color of the icons, but they must have solid colors
+     */
+    private Drawable getIcon(int position) {
+        switch (position) {
+            case 0:
+                return res.getDrawable(R.drawable.ic_drawer);
+            case 1:
+                return res.getDrawable(R.drawable.ic_drawer);
+            case 2:
+                return res.getDrawable(R.drawable.ic_drawer);
+
+        }
+        return null;
+    }
+
+    @Override
+    public void onInsetsChanged(Rect insets) {
+        Toolbar toolbar = this.toolbar;
+        ViewGroup.MarginLayoutParams lp = (ViewGroup.MarginLayoutParams) toolbar.getLayoutParams();
+        lp.topMargin = insets.top;
+        int top = insets.top;
+        insets.top += toolbar.getHeight();
+        toolbar.setLayoutParams(lp);
+        insets.top = top; // revert
+    }
+
+    public static class IndexFragment extends Fragment {
+        @Override
+        public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
+            TextView text = new TextView(container.getContext());
+            text.setText("Section");
+            text.setGravity(Gravity.CENTER);
+            return text;
+        }
     }
 
     private class ViewPagerAdapter extends FragmentStatePagerAdapter {
@@ -72,46 +108,6 @@ public class MainActivity extends ActionBarActivity implements ScrimInsetsFrameL
             }
         }
 
-    }
-
-    /*
-     * It doesn't matter the color of the icons, but they must have solid colors
-     */
-    private Drawable getIcon(int position) {
-        switch (position) {
-            case 0:
-                return res.getDrawable(R.drawable.ic_drawer);
-            case 1:
-                return res.getDrawable(R.drawable.ic_drawer);
-            case 2:
-                return res.getDrawable(R.drawable.ic_drawer);
-
-        }
-        return null;
-    }
-
-    public static class IndexFragment extends Fragment {
-        @Override
-        public View onCreateView(LayoutInflater inflater,
-                                 @Nullable ViewGroup container,
-                                 @Nullable Bundle savedInstanceState) {
-            TextView text = new TextView(container.getContext());
-            text.setText("Section");
-            text.setGravity(Gravity.CENTER);
-            return text;
-        }
-    }
-
-    @Override
-    public void onInsetsChanged(Rect insets) {
-        Toolbar toolbar = this.toolbar;
-        ViewGroup.MarginLayoutParams lp = (ViewGroup.MarginLayoutParams)
-                toolbar.getLayoutParams();
-        lp.topMargin = insets.top;
-        int top = insets.top;
-        insets.top += toolbar.getHeight();
-        toolbar.setLayoutParams(lp);
-        insets.top = top; // revert
     }
 
 }

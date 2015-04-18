@@ -11,18 +11,15 @@ import java.util.List;
 
 public class CustomAnimator extends ValueAnimator implements ValueAnimator.AnimatorUpdateListener {
     private final Rect mTmpRect;
-
+    private final int ANIMATION_DURATION = 3500;
     private boolean mIsRevert;
-
     private ViewGroup mMainContainer;
     private View mFocusedView;
     private View mFocusedViewContainer;
     private List<View> mFadedOutToBottomViews, mSlideToTop;
     private View mStickyTo;
     private ViewGroup mEditModeViewGroup;
-
     private int mEditModeHalfHeight;
-    private final int ANIMATION_DURATION = 3500;
 
     public CustomAnimator() {
         super();
@@ -46,13 +43,11 @@ public class CustomAnimator extends ValueAnimator implements ValueAnimator.Anima
         mFocusedView = focusedView;
         mFocusedViewContainer = focusedViewContainer;
         mFadedOutToBottomViews.clear();
-        if (fadedOutToBottomViews != null)
-            mFadedOutToBottomViews.addAll(fadedOutToBottomViews);
+        if (fadedOutToBottomViews != null) mFadedOutToBottomViews.addAll(fadedOutToBottomViews);
         mStickyTo = stickyTo;
         mEditModeViewGroup = editModeView;
         mSlideToTop.clear();
-        if (slideToTop != null)
-            mSlideToTop.addAll(slideToTop);
+        if (slideToTop != null) mSlideToTop.addAll(slideToTop);
 
         removeAllListeners();
 
@@ -219,8 +214,7 @@ public class CustomAnimator extends ValueAnimator implements ValueAnimator.Anima
                 mFadedOutToBottomViews.get(i).setAlpha(currentPos.getNextContainersAlpha());
             }
 
-            if (mStickyTo != null)
-                mStickyTo.setY(currentPos.getStickToY());
+            if (mStickyTo != null) mStickyTo.setY(currentPos.getStickToY());
 
             mEditModeViewGroup.setY(currentPos.getEditY());
             mEditModeViewGroup.setAlpha(currentPos.getEditAlpha());
@@ -229,8 +223,7 @@ public class CustomAnimator extends ValueAnimator implements ValueAnimator.Anima
             mEditModeViewGroup.setY(currentPos.getEditY());
             mEditModeViewGroup.setAlpha(currentPos.getEditAlpha());
 
-            if (mStickyTo != null)
-                mStickyTo.setY(currentPos.getStickToY());
+            if (mStickyTo != null) mStickyTo.setY(currentPos.getStickToY());
 
             for (int i = 0; i < mFadedOutToBottomViews.size(); i++) {
                 mFadedOutToBottomViews.get(i).setY(currentPos.getNextContainersY()[i]);

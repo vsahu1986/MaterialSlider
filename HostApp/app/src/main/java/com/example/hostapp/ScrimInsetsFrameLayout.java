@@ -52,8 +52,7 @@ public class ScrimInsetsFrameLayout extends FrameLayout {
     }
 
     private void init(Context context, AttributeSet attrs, int defStyle) {
-        final TypedArray a = context.obtainStyledAttributes(attrs,
-                R.styleable.ScrimInsetsView, defStyle, 0);
+        final TypedArray a = context.obtainStyledAttributes(attrs, R.styleable.ScrimInsetsView, defStyle, 0);
         if (a == null) {
             return;
         }

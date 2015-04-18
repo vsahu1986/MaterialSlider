@@ -4,7 +4,7 @@
     android:layout_width="fill_parent"
     android:layout_height="fill_parent">
 
-    <slidinguppanel.SlidingUpPanelLayout
+    <slidinguppanel.FourSquareSlidingUpPanelLayout
         android:id="@+id/slidingLayout"
         android:gravity="bottom"
         app:shadowHeight="0dp"
@@ -47,7 +47,7 @@
                 android:layout_below="@id/transparentView"
                 android:smoothScrollbar="false" />
         </RelativeLayout>
-    </slidinguppanel.SlidingUpPanelLayout>
+    </slidinguppanel.FourSquareSlidingUpPanelLayout>
 
     <!-- more code here -->
 </RelativeLayout>

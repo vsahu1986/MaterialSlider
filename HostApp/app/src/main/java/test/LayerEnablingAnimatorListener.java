@@ -9,8 +9,7 @@ public class LayerEnablingAnimatorListener extends AnimatorListenerAdapter {
     private int mLayerType;
 
     public LayerEnablingAnimatorListener(View targetView) {
-        if (targetView == null)
-            throw new NullPointerException("Target view cannot be null");
+        if (targetView == null) throw new NullPointerException("Target view cannot be null");
         mTargetView = targetView;
     }
 

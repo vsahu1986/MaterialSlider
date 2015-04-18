@@ -40,79 +40,6 @@ public class OuterLayout extends RelativeLayout {
     private boolean mIsOpen;
 
 
-    public class DragHelperCallback extends ViewDragHelper.Callback {
-        @Override
-        public void onViewDragStateChanged(int state) {
-            if (state == mDraggingState) { // no change
-                return;
-            }
-            if ((mDraggingState == ViewDragHelper.STATE_DRAGGING || mDraggingState == ViewDragHelper.STATE_SETTLING) &&
-                    state == ViewDragHelper.STATE_IDLE) {
-                // the view stopped from moving.
-
-                if (mDraggingBorder == 0) {
-                    onStopDraggingToClosed();
-                } else if (mDraggingBorder == mVerticalRange) {
-                    mIsOpen = true;
-                }
-            }
-            if (state == ViewDragHelper.STATE_DRAGGING) {
-                onStartDragging();
-            }
-            mDraggingState = state;
-        }
-
-        @Override
-        public void onViewPositionChanged(View changedView, int left, int top, int dx, int dy) {
-            mDraggingBorder = top;
-        }
-
-        public int getViewVerticalDragRange(View child) {
-            return mVerticalRange;
-        }
-
-        @Override
-        public boolean tryCaptureView(View view, int i) {
-            return (view.getId() == R.id.main_layout);
-        }
-
-        @Override
-        public int clampViewPositionVertical(View child, int top, int dy) {
-            final int topBound = getPaddingTop();
-            final int bottomBound = mVerticalRange;
-            return Math.min(Math.max(top, topBound), bottomBound);
-        }
-
-        @Override
-        public void onViewReleased(View releasedChild, float xvel, float yvel) {
-            final float rangeToCheck = mVerticalRange;
-            if (mDraggingBorder == 0) {
-                mIsOpen = false;
-                return;
-            }
-            if (mDraggingBorder == rangeToCheck) {
-                mIsOpen = true;
-                return;
-            }
-            boolean settleToOpen = false;
-            if (yvel > AUTO_OPEN_SPEED_LIMIT) { // speed has priority over position
-                settleToOpen = true;
-            } else if (yvel < -AUTO_OPEN_SPEED_LIMIT) {
-                settleToOpen = false;
-            } else if (mDraggingBorder > rangeToCheck / 2) {
-                settleToOpen = true;
-            } else if (mDraggingBorder < rangeToCheck / 2) {
-                settleToOpen = false;
-            }
-
-            final int settleDestY = settleToOpen ? mVerticalRange : 0;
-
-            if (mDragHelper.settleCapturedViewAt(0, settleDestY)) {
-                ViewCompat.postInvalidateOnAnimation(OuterLayout.this);
-            }
-        }
-    }
-
     public OuterLayout(Context context, AttributeSet attrs) {
         super(context, attrs);
         mIsOpen = false;
@@ -177,11 +104,82 @@ public class OuterLayout extends RelativeLayout {
     }
 
     public boolean isMoving() {
-        return (mDraggingState == ViewDragHelper.STATE_DRAGGING ||
-                mDraggingState == ViewDragHelper.STATE_SETTLING);
+        return (mDraggingState == ViewDragHelper.STATE_DRAGGING || mDraggingState == ViewDragHelper.STATE_SETTLING);
     }
 
     public boolean isOpen() {
         return mIsOpen;
+    }
+
+    public class DragHelperCallback extends ViewDragHelper.Callback {
+        @Override
+        public void onViewDragStateChanged(int state) {
+            if (state == mDraggingState) { // no change
+                return;
+            }
+            if ((mDraggingState == ViewDragHelper.STATE_DRAGGING || mDraggingState == ViewDragHelper.STATE_SETTLING) && state == ViewDragHelper.STATE_IDLE) {
+                // the view stopped from moving.
+
+                if (mDraggingBorder == 0) {
+                    onStopDraggingToClosed();
+                } else if (mDraggingBorder == mVerticalRange) {
+                    mIsOpen = true;
+                }
+            }
+            if (state == ViewDragHelper.STATE_DRAGGING) {
+                onStartDragging();
+            }
+            mDraggingState = state;
+        }
+
+        @Override
+        public void onViewPositionChanged(View changedView, int left, int top, int dx, int dy) {
+            mDraggingBorder = top;
+        }
+
+        public int getViewVerticalDragRange(View child) {
+            return mVerticalRange;
+        }
+
+        @Override
+        public boolean tryCaptureView(View view, int i) {
+            return (view.getId() == R.id.main_layout);
+        }
+
+        @Override
+        public int clampViewPositionVertical(View child, int top, int dy) {
+            final int topBound = getPaddingTop();
+            final int bottomBound = mVerticalRange;
+            return Math.min(Math.max(top, topBound), bottomBound);
+        }
+
+        @Override
+        public void onViewReleased(View releasedChild, float xvel, float yvel) {
+            final float rangeToCheck = mVerticalRange;
+            if (mDraggingBorder == 0) {
+                mIsOpen = false;
+                return;
+            }
+            if (mDraggingBorder == rangeToCheck) {
+                mIsOpen = true;
+                return;
+            }
+            boolean settleToOpen = false;
+            if (yvel > AUTO_OPEN_SPEED_LIMIT) { // speed has priority over position
+                settleToOpen = true;
+            } else if (yvel < -AUTO_OPEN_SPEED_LIMIT) {
+                settleToOpen = false;
+            } else if (mDraggingBorder > rangeToCheck / 2) {
+                settleToOpen = true;
+            } else if (mDraggingBorder < rangeToCheck / 2) {
+                settleToOpen = false;
+            }
+
+            final int settleDestY = settleToOpen ? mVerticalRange : 0;
+
+            if (mDragHelper.settleCapturedViewAt(0, settleDestY)) {
+                ViewCompat.postInvalidateOnAnimation(OuterLayout.this);
+            }
+        }
     }
 }

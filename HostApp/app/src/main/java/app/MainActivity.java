@@ -19,15 +19,10 @@ package app;
 import android.app.Activity;
 import android.app.FragmentTransaction;
 import android.content.Context;
-import android.content.pm.PackageInfo;
-import android.content.pm.PackageManager;
-import android.content.pm.Signature;
 import android.location.Criteria;
 import android.location.Location;
 import android.location.LocationManager;
 import android.os.Bundle;
-import android.util.Base64;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.widget.AdapterView;
@@ -42,17 +37,15 @@ import com.google.android.gms.maps.MapFragment;
 import com.google.android.gms.maps.model.CameraPosition;
 import com.google.android.gms.maps.model.LatLng;
 
-import java.security.MessageDigest;
-import java.security.NoSuchAlgorithmException;
 import java.util.ArrayList;
 
-import slidinguppanel.SlidingUpPanelLayout;
+import slidinguppanel.FourSquareSlidingUpPanelLayout;
 
 
-public class MainActivity extends Activity implements SlidingUpPanelLayout.PanelSlideListener {
+public class MainActivity extends Activity implements FourSquareSlidingUpPanelLayout.PanelSlideListener {
 
     private ListView mListView;
-    private SlidingUpPanelLayout mSlidingUpPanelLayout;
+    private FourSquareSlidingUpPanelLayout mSlidingUpPanelLayout;
 
     private View mTransparentHeaderView;
     private View mTransparentView;
@@ -68,24 +61,11 @@ public class MainActivity extends Activity implements SlidingUpPanelLayout.Panel
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main_slide);
 
-        try {
-            PackageInfo info = getPackageManager().getPackageInfo(
-                    "your.package",
-                    PackageManager.GET_SIGNATURES);
-            for (Signature signature : info.signatures) {
-                MessageDigest md = MessageDigest.getInstance("SHA-1");
-                md.update(signature.toByteArray());
-                Log.d("KeyHash:", Base64.encodeToString(md.digest(), Base64.DEFAULT));
-            }
-        } catch (PackageManager.NameNotFoundException e) {
 
-        } catch (NoSuchAlgorithmException e) {
-
-        }
         mListView = (ListView) findViewById(R.id.list);
         mListView.setOverScrollMode(ListView.OVER_SCROLL_NEVER);
 
-        mSlidingUpPanelLayout = (SlidingUpPanelLayout) findViewById(R.id.slidingLayout);
+        mSlidingUpPanelLayout = (FourSquareSlidingUpPanelLayout) findViewById(R.id.slidingLayout);
         mSlidingUpPanelLayout.setEnableDragViewTouchEvents(true);
 
         int mapHeight = getResources().getDimensionPixelSize(R.dimen.map_height);
